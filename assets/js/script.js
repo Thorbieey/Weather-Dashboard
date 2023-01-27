@@ -37,7 +37,7 @@ function searchCity(event) {
         // Render search history
         renderSearchHistory();
         // Render current weather conditions for search city
-        // renderCurrentConditions();
+        renderCurrentConditions();
     }
     
     
