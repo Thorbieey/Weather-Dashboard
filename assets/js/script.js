@@ -34,14 +34,20 @@ function searchCity(event) {
 
 // Function to render current weather conditions for selected location
 function renderCurrentConditions() {
-    let queryURL = `http://api.openweathermap.org/geo/1.0/direct?q=${searchedCity}&limit=1&appid=3c64b891a9b4f02005c165da06e7c870`;
     // Fetch information about city geographic names & co-ordinates
-    fetch (queryURL)
+    fetch (`http://api.openweathermap.org/geo/1.0/direct?q=${searchedCity}&limit=1&appid=3c64b891a9b4f02005c165da06e7c870`)
         .then(response => response.json())
         .then(response =>{
             console.log(response[0].lat);
             console.log(response[0].lon);
+            // Fetch information about weather conditions based on the city's geographical location lat/long
+            return fetch (`http://api.openweathermap.org/data/2.5/forecast?lat=${response[0].lat}&lon=${response[0].lon}&appid=3c64b891a9b4f02005c165da06e7c870`)
         })
+    
+    .then(response => response.json())
+    .then(response =>{
+        console.log(response)
+    })
 }
 
 // Function to render search history 
