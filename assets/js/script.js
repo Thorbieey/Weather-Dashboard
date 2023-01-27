@@ -32,7 +32,7 @@ function searchCity(event) {
     
 }
 
-// Function to render current weather conditions for selected location
+// Function to display current weather conditions for selected location
 function renderCurrentConditions() {
     // Fetch information about city geographic names & co-ordinates
     fetch (`http://api.openweathermap.org/geo/1.0/direct?q=${searchedCity}&limit=1&appid=3c64b891a9b4f02005c165da06e7c870`)
@@ -53,8 +53,22 @@ function renderCurrentConditions() {
                                     <p>Wind: ${(response.list[0].wind.speed *3.6).toFixed(2)} MPH</p>
                                     <p>Humidity: ${response.list[0].main.humidity} %</p>
                                     `;
+        return render5DayForecast(response);
         // document.querySelector("#today").appendChild(searchedCityDiv);
     })
+}
+
+// Function to display weather conditions for next 5 days
+function render5DayForecast(response){
+    let forecastCards = document.createElement("div");
+    forecastCards.setAttribute("class", "card-body");
+    forecastCards.innerHTML = `
+                                    <h5>${moment(response.list[4].dt, "X").format("DD/MM/YYYY")}</h5>
+                                    <p>Temp: ${response.list[0].main.temp} °C</p>
+                                    <p>Wind: ${(response.list[0].wind.speed *3.6).toFixed(2)} MPH</p>
+                                    <p>Humidity: ${response.list[0].main.humidity} %</p>
+                                    `;
+    document.querySelector("#forecast").appendChild(forecastCards);
 }
 
 // Function to render search history 
