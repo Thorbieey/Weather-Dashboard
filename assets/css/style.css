@@ -1,5 +1,25 @@
+:root {
+    --primary-color: #142727;
+    --secondary-color: #00ffff;
+    --tertiary-color: #201e5ee9;
+}
+
+body {
+    background-color: #fff;
+    /* padding-right: 5px; */
+}
+
 /* Forecast Section */
 #forecast {
+    /* Section housing 5-day forecast */
      flex-direction: row;
      justify-content: space-between;
+
 }
+.custom-card{
+    /*  */
+    padding: 10px 5px;
+    background-color: #34456F;
+    color: #FFF;
+}
+

@@ -19,23 +19,35 @@ function searchCity(event) {
     // Store search input value (i.e, name of city) & and update local storage
     searchedCity = document.querySelector("#search-input").value
     if (cities === null) {
-        // If there is no search history
+        // If there is no search history reset class from null to array
         cities = []; 
     } 
-    cities.push(searchedCity);
-    localStorage.setItem("searchHistory", JSON.stringify(cities));
+    else if (searchedCity ==="") {
+        // if no city is entered
+        alert("Please enter valid City")
+    }
+    else{
+        // if a city name is entered
+        cities.push(searchedCity);
+        // Reverse city array and remove duplicates
+        cities = [...new Set(cities.reverse())];
+        // Store reveresed Cities array in search history local storage version
+        localStorage.setItem("searchHistory", JSON.stringify(cities.reverse()));
+        
+        // Render search history
+        renderSearchHistory();
+        // Render current weather conditions for search city
+        // renderCurrentConditions();
+    }
     
-    // Render search history
-    renderSearchHistory();
-    // Render current weather conditions for search city
-    renderCurrentConditions();
     
 }
+
 
 // Function to display current weather conditions for selected location
 function renderCurrentConditions() {
     // Fetch information about city geographic names & co-ordinates
-    fetch (`http://api.openweathermap.org/geo/1.0/direct?q=${searchedCity}&limit=1&appid=3c64b891a9b4f02005c165da06e7c870`)
+    fetch (`http://api.openweathermap.org/geo/1.0/direct?q=${searchedCity}&limit=3&appid=3c64b891a9b4f02005c165da06e7c870`)
         .then(response => response.json())
         .then(response =>{
             // Fetch information about weather conditions based on the city's geographical location lat/long
@@ -44,7 +56,6 @@ function renderCurrentConditions() {
     
     .then(response => response.json())
     .then(response =>{
-        console.log(response)
         // Generate search history buttons: create/set content and prepend buttons to page
         // let searchedCityDiv = document.createElement("div");
         document.querySelector("#today").innerHTML = `
@@ -65,7 +76,7 @@ function render5DayForecast(response){
     for (let i = 0; i < dayIndexes.length; i++) {
         const dayIndex = dayIndexes[i];
         let forecastCards = document.createElement("div");
-    forecastCards.setAttribute("class", "card-body col-lg-2");
+    forecastCards.setAttribute("class", "card custom-card col-lg-2");
     forecastCards.innerHTML = `
                                     <h5>${moment(response.list[dayIndex].dt, "X").format("DD/MM/YYYY, HH:mm:ss")}</h5>
                                     <p>Temp: ${response.list[dayIndex].main.temp} °C</p>
