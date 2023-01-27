@@ -23,7 +23,7 @@ let cities = [];
 
 init();
 function init() {
-    cities = JSON.parse(localStorage.getItem('searchHistory'));
+    
     // Render search history
     renderSearchHistory();
     
@@ -36,8 +36,13 @@ function searchCity(event) {
 
     // Store search input value (i.e, name of city) & and update local storage
     let searchedCity = document.querySelector("#search-input").value
+    if (cities === null) {
+        // If there is no search history
+        cities = []; 
+    } 
     cities.push(searchedCity);
     localStorage.setItem("searchHistory", JSON.stringify(cities));
+
     // Render search history
     renderSearchHistory();
     
@@ -45,18 +50,20 @@ function searchCity(event) {
 
 // Function to render search history 
 function renderSearchHistory() {
-    document.querySelector("#history").textContent = ""
-    for (let i = 0; i < cities.length; i++) {
-        const city = cities[i];
-        // Generate search history buttons: create/set content and prepend buttons to page
-        let searchedCityBtn = document.createElement("div");
-        searchedCityBtn.innerHTML = `
-                                    <button class ="row">${city}</button>
-                                    `
-        document.querySelector("#history").prepend(searchedCityBtn);
-        console.log(cities);
-    }
-    
+    document.querySelector("#history").textContent = "";
+    cities = JSON.parse(localStorage.getItem("searchHistory"));
+    if (cities !== null) {
+        for (let i = 0; i < cities.length; i++) {
+            const city = cities[i];
+                // Generate search history buttons: create/set content and prepend buttons to page
+                let searchedCityBtn = document.createElement("div");
+                searchedCityBtn.innerHTML = `
+                                            <button class ="row">${city}</button>
+                                            `
+                document.querySelector("#history").prepend(searchedCityBtn);
+                console.log(cities);
+        }
+    }   
 }
 
 // event listener for the button to search for city
