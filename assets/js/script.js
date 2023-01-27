@@ -38,8 +38,6 @@ function renderCurrentConditions() {
     fetch (`http://api.openweathermap.org/geo/1.0/direct?q=${searchedCity}&limit=1&appid=3c64b891a9b4f02005c165da06e7c870`)
         .then(response => response.json())
         .then(response =>{
-            console.log(response[0].lat);
-            console.log(response[0].lon);
             // Fetch information about weather conditions based on the city's geographical location lat/long
             return fetch (`http://api.openweathermap.org/data/2.5/forecast?lat=${response[0].lat}&lon=${response[0].lon}&appid=3c64b891a9b4f02005c165da06e7c870`)
         })
@@ -47,6 +45,15 @@ function renderCurrentConditions() {
     .then(response => response.json())
     .then(response =>{
         console.log(response)
+        // Generate search history buttons: create/set content and prepend buttons to page
+        // let searchedCityDiv = document.createElement("div");
+        document.querySelector("#today").innerHTML = `
+                                    <h2>${response.city.name} (${moment(response.list[0].dt, "X").format("DD/MM/YYYY, HH:mm:ss")})</h2>
+                                    <p>Temp: ${response.list[0].main.temp} °C</p>
+                                    <p>Wind: ${(response.list[0].wind.speed *3.6).toFixed(2)} MPH</p>
+                                    <p>Humidity: ${response.list[0].main.humidity} %</p>
+                                    `;
+        // document.querySelector("#today").appendChild(searchedCityDiv);
     })
 }
 
@@ -61,7 +68,7 @@ function renderSearchHistory() {
                 let searchedCityBtn = document.createElement("div");
                 searchedCityBtn.innerHTML = `
                                             <button class ="row">${city}</button>
-                                            `
+                                            `;
                 document.querySelector("#history").prepend(searchedCityBtn);
         }
     }   
