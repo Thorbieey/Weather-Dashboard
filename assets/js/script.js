@@ -64,6 +64,7 @@ function renderCurrentConditions() {
                                     <p>Wind: ${(response.list[0].wind.speed *3.6).toFixed(2)} MPH</p>
                                     <p>Humidity: ${response.list[0].main.humidity} %</p>
                                     `;
+        // Display weather forecast
         return render5DayForecast(response);
         // document.querySelector("#today").appendChild(searchedCityDiv);
     })
@@ -71,6 +72,8 @@ function renderCurrentConditions() {
 
 // Function to display weather conditions for next 5 days on cards
 function render5DayForecast(response){
+    // Reset Forecast Section display content
+    document.querySelector("#forecast").textContent = "";
     // Array of index for dates/times we would like to retrieve weather forcast about
     let dayIndexes = ["4", "12", "20", "28", "36"];
     for (let i = 0; i < dayIndexes.length; i++) {
@@ -90,6 +93,7 @@ function render5DayForecast(response){
 
 // Function to render search history 
 function renderSearchHistory() {
+    // Reset History Section display content
     document.querySelector("#history").textContent = "";
     cities = JSON.parse(localStorage.getItem("searchHistory"));
     if (cities !== null) {
