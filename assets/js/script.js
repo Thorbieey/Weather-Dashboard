@@ -58,17 +58,23 @@ function renderCurrentConditions() {
     })
 }
 
-// Function to display weather conditions for next 5 days
+// Function to display weather conditions for next 5 days on cards
 function render5DayForecast(response){
-    let forecastCards = document.createElement("div");
-    forecastCards.setAttribute("class", "card-body");
+    // Array of index for dates/times we would like to retrieve weather forcast about
+    let dayIndexes = ["4", "12", "20", "28", "36"];
+    for (let i = 0; i < dayIndexes.length; i++) {
+        const dayIndex = dayIndexes[i];
+        let forecastCards = document.createElement("div");
+    forecastCards.setAttribute("class", "card-body col-lg-2");
     forecastCards.innerHTML = `
-                                    <h5>${moment(response.list[4].dt, "X").format("DD/MM/YYYY")}</h5>
-                                    <p>Temp: ${response.list[0].main.temp} °C</p>
-                                    <p>Wind: ${(response.list[0].wind.speed *3.6).toFixed(2)} MPH</p>
-                                    <p>Humidity: ${response.list[0].main.humidity} %</p>
+                                    <h5>${moment(response.list[dayIndex].dt, "X").format("DD/MM/YYYY, HH:mm:ss")}</h5>
+                                    <p>Temp: ${response.list[dayIndex].main.temp} °C</p>
+                                    <p>Wind: ${(response.list[dayIndex].wind.speed *3.6).toFixed(2)} MPH</p>
+                                    <p>Humidity: ${response.list[dayIndex].main.humidity} %</p>
                                     `;
     document.querySelector("#forecast").appendChild(forecastCards);
+    }
+    
 }
 
 // Function to render search history 

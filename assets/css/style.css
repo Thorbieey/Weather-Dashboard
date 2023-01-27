@@ -1,0 +1,5 @@
+/* Forecast Section */
+#forecast {
+     flex-direction: row;
+     justify-content: space-between;
+}
