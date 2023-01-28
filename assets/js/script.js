@@ -74,13 +74,20 @@ function renderCurrentConditions() {
 function render5DayForecast(response){
     // Reset Forecast Section display content
     document.querySelector("#forecast").textContent = "";
+
+    // Add Forecast Section heading
+    let forecastSectionHeading = document.createElement("h4");
+    forecastSectionHeading.textContent = "5-Day Forecast:";
+    forecastSectionHeading.setAttribute("class", "forecast-heading col-lg-12");
+    document.querySelector("#forecast").append(forecastSectionHeading);
+    
     // Array of index for dates/times we would like to retrieve weather forcast about
     let dayIndexes = ["4", "12", "20", "28", "36"];
     console.log(response.list[0]);
     for (let i = 0; i < dayIndexes.length; i++) {
         const dayIndex = dayIndexes[i];
         let forecastCards = document.createElement("div");
-        forecastCards.setAttribute("class", "card custom-card col-lg-2");
+        forecastCards.setAttribute("class", "card forecast-card col-lg-2");
         forecastCards.innerHTML = `
                                         <h5>${moment(response.list[dayIndex].dt, "X").format("DD/MM/YYYY")}</h5>
                                         <img id="forecast-icon" src ="http://openweathermap.org/img/w/${response.list[0].weather[0].icon}.png"/>
@@ -88,7 +95,7 @@ function render5DayForecast(response){
                                         <p>Wind: ${(response.list[dayIndex].wind.speed *3.6).toFixed(2)} MPH</p>
                                         <p>Humidity: ${response.list[dayIndex].main.humidity} %</p>
                                         `;
-        document.querySelector("#forecast").appendChild(forecastCards);
+        document.querySelector("#forecast").append(forecastCards);
     }
     
 }

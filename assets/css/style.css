@@ -28,14 +28,20 @@ body {
      flex-direction: row;
      justify-content: space-between;
 }
-.custom-card{
-    /* Forecast Cards */
+
+.forecast-heading{
+    /* Forecast section heading */
+    padding: 0;
+}
+.forecast-card{
+    /* Forecast cards */
     padding: 10px 5px;
     background-color: var(--card-color);
     color: var(--white-color);
 }
 
 #forecast-icon{
+    /* Forcast icons */
     width: 50px;
 }
 
