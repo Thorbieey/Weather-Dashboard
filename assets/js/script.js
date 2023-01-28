@@ -8,7 +8,6 @@ init();
 function init() {
     // Render search history
     renderSearchHistory();
-    
 }
 
 // Function to handle click of search button
@@ -39,16 +38,13 @@ function searchCity(event) {
         // Render search history
         renderSearchHistory();
         // Render current weather conditions for search city
-        renderCurrentConditions();
-    }
-    
-    
+        getWeatherInfo();
+    }  
 }
 
-
-// Function to display current weather conditions for selected location
-function renderCurrentConditions() {
-    // Fetch information about city geographic names & co-ordinates
+// Function to get weather conditions for selected location
+function getWeatherInfo() {
+    // Fetch information about selected city geographic names & co-ordinates
     fetch (`http://api.openweathermap.org/geo/1.0/direct?q=${searchedCity}&limit=3&appid=3c64b891a9b4f02005c165da06e7c870`)
         .then(response => response.json())
         .then(response =>{
@@ -58,18 +54,21 @@ function renderCurrentConditions() {
     
     .then(response => response.json())
     .then(response =>{
-        // Generate search history buttons: create/set content and prepend buttons to page
-        // let searchedCityDiv = document.createElement("div");
-        document.querySelector("#today").innerHTML = `
-                                    <h2>${response.city.name} (${moment(response.list[0].dt, "X").format("DD/MM/YYYY, HH:mm:ss")})</h2>
-                                    <p>Temp: ${response.list[0].main.temp} °C</p>
-                                    <p>Wind: ${(response.list[0].wind.speed *3.6).toFixed(2)} MPH</p>
-                                    <p>Humidity: ${response.list[0].main.humidity} %</p>
-                                    `;
-        // Display weather forecast
-        return render5DayForecast(response);
-        // document.querySelector("#today").appendChild(searchedCityDiv);
+       return renderCurrentConditions(response);
     })
+}
+
+// Function to display current weather conditions for selected city
+function renderCurrentConditions(response){
+     // Generate search history buttons: create/set content and prepend buttons to page
+    document.querySelector("#today").innerHTML = `
+                                <h2>${response.city.name} (${moment(response.list[0].dt, "X").format("DD/MM/YYYY, HH:mm:ss")})</h2>
+                                <p>Temp: ${response.list[0].main.temp} °C</p>
+                                <p>Wind: ${(response.list[0].wind.speed *3.6).toFixed(2)} MPH</p>
+                                <p>Humidity: ${response.list[0].main.humidity} %</p>
+                                `;
+    // Display weather forecast
+    return render5DayForecast(response);
 }
 
 // Function to display weather conditions for next 5 days on cards
