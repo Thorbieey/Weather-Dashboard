@@ -8,6 +8,10 @@ init();
 function init() {
     // Render search history
     renderSearchHistory();
+
+    // Set default for displaying weather info to London
+    searchedCity = document.querySelector(".weather-search").placeholder;
+    getWeatherInfo();
 }
 
 // Function to handle click of search button
