@@ -47,32 +47,33 @@ function getWeatherInfo() {
     // Fetch information about selected city geographic names & co-ordinates
     fetch (`http://api.openweathermap.org/geo/1.0/direct?q=${searchedCity}&limit=3&appid=3c64b891a9b4f02005c165da06e7c870`)
         .then(response => response.json())
-        .then(response =>{
+        .then(cityGeo =>{
             // Fetch information about weather conditions based on the city's geographical location lat/long
-            return fetch (`http://api.openweathermap.org/data/2.5/forecast?lat=${response[0].lat}&lon=${response[0].lon}&appid=3c64b891a9b4f02005c165da06e7c870`)
+            return fetch (`http://api.openweathermap.org/data/2.5/forecast?lat=${cityGeo[0].lat}&lon=${cityGeo[0].lon}&appid=3c64b891a9b4f02005c165da06e7c870`)
         })
     
     .then(response => response.json())
-    .then(response =>{
-       return renderCurrentConditions(response);
+    .then(weatherData =>{
+        // Display current weather conditions
+       return renderCurrentConditions(weatherData);
     })
 }
 
 // Function to display current weather conditions for selected city
-function renderCurrentConditions(response){
+function renderCurrentConditions(weatherData){
      // Generate search history buttons: create/set content and prepend buttons to page
     document.querySelector("#today").innerHTML = `
-                                <h2>${response.city.name} (${moment(response.list[0].dt, "X").format("DD/MM/YYYY, HH:mm:ss")})</h2>
-                                <p>Temp: ${response.list[0].main.temp} °C</p>
-                                <p>Wind: ${(response.list[0].wind.speed *3.6).toFixed(2)} MPH</p>
-                                <p>Humidity: ${response.list[0].main.humidity} %</p>
+                                <h2>${weatherData.city.name} (${moment(weatherData.list[0].dt, "X").format("DD/MM/YYYY, HH:mm:ss")}) <img id="forecast-icon" src ="http://openweathermap.org/img/w/${weatherData.list[0].weather[0].icon}.png"/></h2>
+                                <p>Temp: ${weatherData.list[0].main.temp} °C</p>
+                                <p>Wind: ${(weatherData.list[0].wind.speed *3.6).toFixed(2)} MPH</p>
+                                <p>Humidity: ${weatherData.list[0].main.humidity} %</p>
                                 `;
     // Display weather forecast
-    return render5DayForecast(response);
+    return render5DayForecast(weatherData);
 }
 
 // Function to display weather conditions for next 5 days on cards
-function render5DayForecast(response){
+function render5DayForecast(weatherData){
     // Reset Forecast Section display content
     document.querySelector("#forecast").textContent = "";
 
@@ -84,17 +85,16 @@ function render5DayForecast(response){
     
     // Array of index for dates/times we would like to retrieve weather forcast about
     let dayIndexes = ["4", "12", "20", "28", "36"];
-    console.log(response.list[0]);
     for (let i = 0; i < dayIndexes.length; i++) {
         const dayIndex = dayIndexes[i];
         let forecastCards = document.createElement("div");
         forecastCards.setAttribute("class", "card forecast-card col-lg-2");
         forecastCards.innerHTML = `
-                                        <h5>${moment(response.list[dayIndex].dt, "X").format("DD/MM/YYYY")}</h5>
-                                        <img id="forecast-icon" src ="http://openweathermap.org/img/w/${response.list[0].weather[0].icon}.png"/>
-                                        <p>Temp: ${response.list[dayIndex].main.temp} °C</p>
-                                        <p>Wind: ${(response.list[dayIndex].wind.speed *3.6).toFixed(2)} MPH</p>
-                                        <p>Humidity: ${response.list[dayIndex].main.humidity} %</p>
+                                        <h5>${moment(weatherData.list[dayIndex].dt, "X").format("DD/MM/YYYY")}</h5>
+                                        <img id="forecast-icon" src ="http://openweathermap.org/img/w/${weatherData.list[0].weather[0].icon}.png"/>
+                                        <p>Temp: ${weatherData.list[dayIndex].main.temp} °C</p>
+                                        <p>Wind: ${(weatherData.list[dayIndex].wind.speed *3.6).toFixed(2)} MPH</p>
+                                        <p>Humidity: ${weatherData.list[dayIndex].main.humidity} %</p>
                                         `;
         document.querySelector("#forecast").append(forecastCards);
     }
