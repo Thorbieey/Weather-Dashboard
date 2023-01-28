@@ -102,12 +102,19 @@ function renderSearchHistory() {
                 // Generate search history buttons: create/set content and prepend buttons to page
                 let searchedCityBtn = document.createElement("div");
                 searchedCityBtn.innerHTML = `
-                                            <button class ="row">${city}</button>
+                                            <button class ="row">${capitalizeFirstLetter(city)}</button>
                                             `;
                 document.querySelector("#history").prepend(searchedCityBtn);
         }
     }   
 }
 
-// event listener for the button to search for city
+// Function to capitalize the first letter of cities displayed in search history
+function capitalizeFirstLetter(city) {
+        return city.charAt(0).toUpperCase() + city.slice(1);
+    
+    
+}
+
+// Event listener for the button to search for city
 document.querySelector("#search-button").addEventListener("click", searchCity)
