@@ -33,6 +33,8 @@ function searchCity(event) {
         cities = [...new Set(cities.reverse())];
         // Store reveresed Cities array in search history local storage version
         localStorage.setItem("searchHistory", JSON.stringify(cities.reverse()));
+        // Clear search input value
+        document.querySelector("#search-input").value = "";
         
         // Render search history
         renderSearchHistory();
