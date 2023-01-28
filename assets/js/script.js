@@ -114,11 +114,11 @@ function renderSearchHistory() {
         for (let i = 0; i < cities.length; i++) {
             const city = cities[i];
                 // Generate search history buttons: create/set content and prepend buttons to page
-                let searchedCityBtn = document.createElement("div");
-                searchedCityBtn.innerHTML = `
+                let cityBtns = document.createElement("div");
+                cityBtns.innerHTML = `
                                             <button class="btn col-lg-12 city-button" id = "${city}-button">${capitalizeFirstLetter(city)}</button>
                                             `;
-                document.querySelector("#history").prepend(searchedCityBtn);
+                document.querySelector("#history").prepend(cityBtns);
         }
     }   
 }
@@ -130,5 +130,16 @@ function capitalizeFirstLetter(city) {
     
 }
 
-// Event listener for the button to search for city
-document.querySelector("#search-button").addEventListener("click", searchCity)
+// Function to set searched city to content of city-button
+function getCityFromHistory(event) {
+    if (event.target.matches("button")) {
+        // Set default for displaying weather info to London
+        searchedCity = event.target.textContent;
+        getWeatherInfo();    
+    }
+}
+
+// Event listener for the button to get weather info for inputted city
+document.querySelector("#search-button").addEventListener("click", searchCity);
+// Event listener for buttons in search history to get weather info for clicked city
+document.querySelector("#history").addEventListener("click", getCityFromHistory);
