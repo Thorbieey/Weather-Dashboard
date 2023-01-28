@@ -27,12 +27,15 @@ body {
     /* Section housing 5-day forecast */
      flex-direction: row;
      justify-content: space-between;
-
 }
 .custom-card{
-    /*  */
+    /* Forecast Cards */
     padding: 10px 5px;
     background-color: var(--card-color);
     color: var(--white-color);
+}
+
+#forecast-icon{
+    width: 50px;
 }
 
