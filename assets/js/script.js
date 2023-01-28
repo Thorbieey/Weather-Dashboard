@@ -102,7 +102,7 @@ function renderSearchHistory() {
                 // Generate search history buttons: create/set content and prepend buttons to page
                 let searchedCityBtn = document.createElement("div");
                 searchedCityBtn.innerHTML = `
-                                            <button class ="row">${capitalizeFirstLetter(city)}</button>
+                                            <button class="btn col-lg-12 city-button" id = "${city}-button">${capitalizeFirstLetter(city)}</button>
                                             `;
                 document.querySelector("#history").prepend(searchedCityBtn);
         }

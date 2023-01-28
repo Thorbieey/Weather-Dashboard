@@ -1,12 +1,25 @@
 :root {
     --primary-color: #142727;
-    --secondary-color: #00ffff;
-    --tertiary-color: #201e5ee9;
+    --white-color: #fff;
+    --city-btn-color: #717D7E;
+    --card-color: #34456F;
 }
 
 body {
-    background-color: #fff;
+    background-color: var(--white-color);
     /* padding-right: 5px; */
+}
+
+/* Aside Section */
+#search-button{
+    /* Search Button */
+    border-radius: 0.25rem;
+}
+
+.city-button{
+    /* City Buttons */
+    margin-bottom: 0.5rem;
+    background-color: var(--city-btn-color);
 }
 
 /* Forecast Section */
@@ -19,7 +32,7 @@ body {
 .custom-card{
     /*  */
     padding: 10px 5px;
-    background-color: #34456F;
-    color: #FFF;
+    background-color: var(--card-color);
+    color: var(--white-color);
 }
 
