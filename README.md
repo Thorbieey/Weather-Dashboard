@@ -15,7 +15,7 @@ SO THAT I can plan a trip accordingly
 ```
 * The weather dashboard consist of an input form which collects the name of the city.
 
-* The current and future weather conditions is displayed for the city user searched for.
+* The current and future weather conditions is displayed for the city searched for.
 
 * When a user views the current weather conditions for a city, the following information is displayed:
   * City name
@@ -32,7 +32,7 @@ SO THAT I can plan a trip accordingly
   * Humidity (%)
   * Wind speed (KPH)
 
-* When a user clicks on a city in the search history they are again presented with current and future conditions for that city
+* When a user clicks on a city in the search history they are again presented with current and future conditions for that city.
 ```
 
 ## Table of Contents
@@ -47,10 +47,10 @@ SO THAT I can plan a trip accordingly
 ### Deployed Application
 
 * The URL of the deployed application:
-[https://thorbieey.github.io/Day-Scheduler/](https://thorbieey.github.io/Day-Scheduler/)
+[https://thorbieey.github.io/Weather-Dashboard/](https://thorbieey.github.io/Weather-Dashboard/)
 
 * The URL of the GitHub repository: 
-[https://github.com/Thorbieey/Day-Scheduler.git](https://github.com/Thorbieey/Day-Scheduler.git)
+[https://github.com/Thorbieey/Weather-Dashboard.git](https://github.com/Thorbieey/Weather-Dashboard.git)
 
 #### Screenshots/Demo
 

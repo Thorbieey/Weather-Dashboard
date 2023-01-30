@@ -49,11 +49,11 @@ function searchCity(event) {
 // Function to get weather conditions for selected location
 function getWeatherInfo() {
     // Fetch information about selected city geographic names & co-ordinates
-    fetch (`http://api.openweathermap.org/geo/1.0/direct?q=${searchedCity}&limit=3&appid=3c64b891a9b4f02005c165da06e7c870`)
+    fetch (`https://api.openweathermap.org/geo/1.0/direct?q=${searchedCity}&limit=3&appid=3c64b891a9b4f02005c165da06e7c870`)
         .then(response => response.json())
         .then(cityGeo =>{
             // Fetch information about weather conditions based on the city's geographical location lat/long
-            return fetch (`http://api.openweathermap.org/data/2.5/forecast?lat=${cityGeo[0].lat}&lon=${cityGeo[0].lon}&appid=3c64b891a9b4f02005c165da06e7c870`)
+            return fetch (`https://api.openweathermap.org/data/2.5/forecast?lat=${cityGeo[0].lat}&lon=${cityGeo[0].lon}&appid=3c64b891a9b4f02005c165da06e7c870`)
         })
     
     .then(response => response.json())
@@ -95,7 +95,7 @@ function render5DayForecast(weatherData){
         forecastCards.setAttribute("class", "card forecast-card col-lg-2");
         forecastCards.innerHTML = `
                                         <h5>${moment(weatherData.list[dayIndex].dt, "X").format("DD/MM/YYYY")}</h5>
-                                        <img id="forecast-icon" src ="http://openweathermap.org/img/w/${weatherData.list[0].weather[0].icon}.png"/>
+                                        <img id="forecast-icon" src ="https://openweathermap.org/img/w/${weatherData.list[0].weather[0].icon}.png"/>
                                         <p>Temp: ${(weatherData.list[dayIndex].main.temp -273.15).toFixed(2)} °C</p>
                                         <p>Wind: ${(weatherData.list[dayIndex].wind.speed *3.6).toFixed(2)} KPH</p>
                                         <p>Humidity: ${weatherData.list[dayIndex].main.humidity} %</p>
