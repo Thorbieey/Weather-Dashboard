@@ -67,7 +67,7 @@ function getWeatherInfo() {
 function renderCurrentConditions(weatherData){
      // Generate search history buttons: create/set content and prepend buttons to page
     document.querySelector("#today").innerHTML = `
-                                <h2>${weatherData.city.name} (${moment(weatherData.list[0].dt, "X").format("DD/MM/YYYY")}) <img id="forecast-icon" src ="http://openweathermap.org/img/w/${weatherData.list[0].weather[0].icon}.png"/></h2>
+                                <h2>${weatherData.city.name} (${moment(weatherData.list[0].dt, "X").format("DD/MM/YYYY")}) <img id="forecast-icon" src ="https://openweathermap.org/img/w/${weatherData.list[0].weather[0].icon}.png"/></h2>
                                 <p>Temp: ${(weatherData.list[0].main.temp -273.15).toFixed(2)} °C</p>
                                 <p>Wind: ${(weatherData.list[0].wind.speed *3.6).toFixed(2)} KPH</p>
                                 <p>Humidity: ${weatherData.list[0].main.humidity} %</p>
