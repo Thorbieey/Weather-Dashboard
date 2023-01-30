@@ -1,13 +1,16 @@
 :root {
-    --primary-color: #142727;
-    --white-color: #fff;
+    --primary-color: #fff;
     --city-btn-color: #717D7E;
-    --card-color: #34456F;
+    --card-color: #202a44;
 }
 
 body {
-    background-color: var(--white-color);
-    /* padding-right: 5px; */
+    background-color: var(--primary-color);
+}
+
+/* Header */
+.weather-header{
+    background: linear-gradient(to right, #323a50, #020e9c);;
 }
 
 /* Aside Section */
@@ -16,10 +19,22 @@ body {
     border-radius: 0.25rem;
 }
 
+.weather-search{
+    /* Input area for entering city weather search */
+    height: 3rem;
+}
+
 .city-button{
-    /* City Buttons */
+    /* Buttons with city names generated from search history*/
     margin-bottom: 0.5rem;
     background-color: var(--city-btn-color);
+}
+
+.city-button:hover {
+    /* City buttons on hover */
+    color: #fff;
+    background-color: #2b2f2f;
+    border-color: var(--city-btn-color);
 }
 
 /* Today Section */
@@ -43,7 +58,7 @@ body {
     /* Forecast cards */
     padding: 10px 5px;
     background-color: var(--card-color);
-    color: var(--white-color);
+    color: var(--primary-color);
 }
 
 #forecast-icon{
