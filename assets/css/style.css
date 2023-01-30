@@ -22,6 +22,12 @@ body {
     background-color: var(--city-btn-color);
 }
 
+/* Today Section */
+#today {
+    /* Section housing current weather conditions */
+    border: 1px solid rgba(0, 0, 0, 0.98);
+}
+
 /* Forecast Section */
 #forecast {
     /* Section housing 5-day forecast */

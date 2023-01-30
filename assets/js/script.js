@@ -67,7 +67,7 @@ function getWeatherInfo() {
 function renderCurrentConditions(weatherData){
      // Generate search history buttons: create/set content and prepend buttons to page
     document.querySelector("#today").innerHTML = `
-                                <h2>${weatherData.city.name} (${moment(weatherData.list[0].dt, "X").format("DD/MM/YYYY, HH:mm:ss")}) <img id="forecast-icon" src ="http://openweathermap.org/img/w/${weatherData.list[0].weather[0].icon}.png"/></h2>
+                                <h2>${weatherData.city.name} (${moment(weatherData.list[0].dt, "X").format("DD/MM/YYYY")}) <img id="forecast-icon" src ="http://openweathermap.org/img/w/${weatherData.list[0].weather[0].icon}.png"/></h2>
                                 <p>Temp: ${(weatherData.list[0].main.temp -273.15).toFixed(2)} °C</p>
                                 <p>Wind: ${(weatherData.list[0].wind.speed *3.6).toFixed(2)} KPH</p>
                                 <p>Humidity: ${weatherData.list[0].main.humidity} %</p>
@@ -97,7 +97,7 @@ function render5DayForecast(weatherData){
                                         <h5>${moment(weatherData.list[dayIndex].dt, "X").format("DD/MM/YYYY")}</h5>
                                         <img id="forecast-icon" src ="http://openweathermap.org/img/w/${weatherData.list[0].weather[0].icon}.png"/>
                                         <p>Temp: ${(weatherData.list[dayIndex].main.temp -273.15).toFixed(2)} °C</p>
-                                        <p>Wind: ${(weatherData.list[dayIndex].wind.speed *3.6).toFixed(2)} MPH</p>
+                                        <p>Wind: ${(weatherData.list[dayIndex].wind.speed *3.6).toFixed(2)} KPH</p>
                                         <p>Humidity: ${weatherData.list[dayIndex].main.humidity} %</p>
                                         `;
         document.querySelector("#forecast").append(forecastCards);
